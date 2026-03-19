@@ -65,7 +65,7 @@ export default function App() {
 
   async function loadJobs() {
     try {
-      const res = await api.get("/api/jobs");
+      const res = await api.get("/jobs");
       setJobs(res?.data?.jobs || []);
     } catch (error) {
       console.error("loadJobs error:", error);
@@ -75,7 +75,7 @@ export default function App() {
 
   async function loadStats() {
     try {
-      const res = await api.get("/api/stats");
+      const res = await api.get("/stats");
       setStats({
         totalJobs: res?.data?.totalJobs || 0,
         activeJobs: res?.data?.activeJobs || 0
@@ -100,7 +100,7 @@ export default function App() {
         return;
       }
 
-      await api.post("/api/jobs", {
+      await api.post("/jobs", {
         id: Date.now().toString(),
         title: title.trim(),
         company: company.trim(),
@@ -126,7 +126,7 @@ export default function App() {
 
   async function deleteJob(id) {
     try {
-      await api.delete(`/api/jobs/${id}`);
+      await api.delete(`/jobs/${id}`);
       await loadJobs();
       await loadStats();
       alert("Đã xóa tin");
